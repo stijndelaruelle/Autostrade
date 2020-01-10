@@ -38,6 +38,7 @@ public static class UtilityMethods
     {
         switch (direction)
         {
+            case Direction.None:      return new Vector2Int(0, 0);
             case Direction.North:     return new Vector2Int(0, 1);
             case Direction.NorthEast: return new Vector2Int(1, 1);
             case Direction.East:      return new Vector2Int(1, 0);

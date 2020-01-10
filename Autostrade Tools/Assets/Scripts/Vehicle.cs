@@ -18,6 +18,13 @@ public class Vehicle : MonoBehaviour
     }
 
     [SerializeField]
+    private int m_StartFrame = 0;
+    public int StartFrame
+    {
+        get { return m_StartFrame; }
+    }
+
+    [SerializeField]
     private List<Direction> m_Moves = null;
 
     [Space(5)]
@@ -101,6 +108,9 @@ public class Vehicle : MonoBehaviour
         if (newFrame < 0 || oldFrame < 0)
             return Vector2Int.zero;
 
+        if (newFrame < m_StartFrame && oldFrame < m_StartFrame)
+            return Vector2Int.zero;
+
         int diff = newFrame - oldFrame;
         int sign = (int)Mathf.Sign(diff);
 
@@ -115,13 +125,15 @@ public class Vehicle : MonoBehaviour
 
             if (sign > 0)
             {
-                if (oldFrame + i >= m_Moves.Count) { direction = m_Moves[m_Moves.Count - 1]; }
-                else                               { direction = m_Moves[oldFrame + i]; }
+                if (oldFrame + i >= m_Moves.Count + m_StartFrame) { direction = m_Moves[m_Moves.Count - 1]; }
+                else if (oldFrame + i < m_StartFrame)             { direction = Direction.None; }
+                else                                              { direction = m_Moves[oldFrame + i - m_StartFrame]; }
             }
             else
             {
-                if (oldFrame - (i + 1) >= m_Moves.Count) { direction = m_Moves[m_Moves.Count - 1]; }
-                else                                     { direction = m_Moves[oldFrame - (i + 1)]; }
+                if (oldFrame - (i + 1) >= m_Moves.Count + m_StartFrame) { direction = m_Moves[m_Moves.Count - 1]; }
+                else if (oldFrame - (i + 1) < m_StartFrame)             { direction = Direction.None; }
+                else                                                    { direction = m_Moves[oldFrame - (i + 1) - m_StartFrame]; }
 
                 direction = UtilityMethods.InvertDirection(direction);
             }
@@ -175,8 +187,9 @@ public class Vehicle : MonoBehaviour
     {
         Direction direction = Direction.North;
 
-        if (m_LevelTimeline.CurrentFrame >= m_Moves.Count) { direction = m_Moves[m_Moves.Count - 1]; }
-        else                                               { direction = m_Moves[m_LevelTimeline.CurrentFrame]; }
+        if (m_LevelTimeline.CurrentFrame >= m_Moves.Count + m_StartFrame) { direction = m_Moves[m_Moves.Count - 1]; }
+        else if (m_LevelTimeline.CurrentFrame < m_StartFrame)             { direction = Direction.None; }
+        else                                                              { direction = m_Moves[m_LevelTimeline.CurrentFrame - m_StartFrame]; }
 
         Vector2Int offset = UtilityMethods.DirectionToVector2Int(direction);
         List<Vector2Int> hitboxes = new List<Vector2Int>();
