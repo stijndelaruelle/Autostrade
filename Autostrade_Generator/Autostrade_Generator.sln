@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autostrade_Generator", "Autostrade_Generator.csproj", "{121C43EF-A2DD-4F20-9049-61DE0B906C40}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{121C43EF-A2DD-4F20-9049-61DE0B906C40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{121C43EF-A2DD-4F20-9049-61DE0B906C40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{121C43EF-A2DD-4F20-9049-61DE0B906C40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{121C43EF-A2DD-4F20-9049-61DE0B906C40}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3D36C1B8-D5DB-4EFA-B18F-380F4632820E}
+	EndGlobalSection
+EndGlobal

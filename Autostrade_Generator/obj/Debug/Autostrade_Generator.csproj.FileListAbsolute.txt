@@ -1,0 +1,7 @@
+D:\Bitsy\Autostrade\Autostrade_Generator\bin\Debug\Autostrade_Generator.exe.config
+D:\Bitsy\Autostrade\Autostrade_Generator\bin\Debug\Autostrade_Generator.exe
+D:\Bitsy\Autostrade\Autostrade_Generator\bin\Debug\Autostrade_Generator.pdb
+D:\Bitsy\Autostrade\Autostrade_Generator\obj\Debug\Autostrade_Generator.csprojAssemblyReference.cache
+D:\Bitsy\Autostrade\Autostrade_Generator\obj\Debug\Autostrade_Generator.csproj.CoreCompileInputs.cache
+D:\Bitsy\Autostrade\Autostrade_Generator\obj\Debug\Autostrade_Generator.exe
+D:\Bitsy\Autostrade\Autostrade_Generator\obj\Debug\Autostrade_Generator.pdb
