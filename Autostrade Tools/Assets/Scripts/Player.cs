@@ -23,11 +23,28 @@ public class Player : MonoBehaviour
 
         if (direction != Direction.None)
         {
-            Vector2Int offset = UtilityMethods.DirectionToVector2Int(direction);
-            transform.position += new Vector3(offset.x, offset.y, 0.0f);
-
+            //We go the the next from no matter what
             if (m_LevelTimeline != null)
                 m_LevelTimeline.NextFrame();
+
+            //Move the player
+            Vector2Int offset = UtilityMethods.DirectionToVector2Int(direction);
+            Vector3 newPosition = transform.position + new Vector3(offset.x, offset.y, 0.0f);
+
+            //Normally these variables should have a better home. But for now this is fine
+            if (newPosition.x < BitsyExporter.s_PlayableZoneStartX)
+                return;
+
+            if (newPosition.x > BitsyExporter.s_PlayableZoneEndX)
+                return;
+
+            if (newPosition.y > BitsyExporter.s_PlayableZoneStartY * -1)
+                return;
+
+            if (newPosition.y < BitsyExporter.s_PlayableZoneEndY * -1)
+                return;
+
+            transform.position = newPosition;
         }
     }
 }

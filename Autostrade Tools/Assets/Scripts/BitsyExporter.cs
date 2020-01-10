@@ -22,10 +22,10 @@ public class BitsyExporter : MonoBehaviour
     private Color m_SpriteColor = Color.white;
 
     //Some default data
-    private static int s_StartExitX = 6;
-    private static int s_StartExitY = 0;
-    private static int s_EndExitX = 9;
-    private static int s_EndExitY = 15;
+    public static int s_PlayableZoneStartX = 6;
+    public static int s_PlayableZoneStartY = 0;
+    public static int s_PlayableZoneEndX = 9;
+    public static int s_PlayableZoneEndY = 15;
 
     private static int s_RoomSize = 16;
     private static string[] s_EmptyStillRoomData =
@@ -228,9 +228,9 @@ public class BitsyExporter : MonoBehaviour
         //Exists
         if (addExits)
         {
-            for (int y = s_StartExitY; y <= s_EndExitY; ++y)
+            for (int y = s_PlayableZoneStartY; y <= s_PlayableZoneEndY; ++y)
             {
-                for (int x = s_StartExitX; x <= s_EndExitX; ++x)
+                for (int x = s_PlayableZoneStartX; x <= s_PlayableZoneEndX; ++x)
                 {
                     //Only add exists if there isn't an ending at that position
                     if (endPositions.Contains(new Vector2Int(x, y)) == false)
