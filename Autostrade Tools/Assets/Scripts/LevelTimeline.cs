@@ -18,7 +18,7 @@ public class LevelTimeline : MonoBehaviour
         get { return s_TimelineMinRange; }
     }
 
-    private static int s_TimelineMaxRange = 500;
+    private static int s_TimelineMaxRange = 330;
     public int TimelineMaxRange
     {
         get { return s_TimelineMaxRange; }

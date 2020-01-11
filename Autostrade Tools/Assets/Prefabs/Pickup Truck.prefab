@@ -46,9 +46,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LevelTimeline: {fileID: 0}
   m_Speed: 1
+  m_StartFrame: 0
   m_Moves: 05000000
   m_Width: 3
   m_Height: 3
+  m_Endings:
+  - The pickup truck and you got totally scrambled!
+  - The pickup truck cracked the case.
+  - The pickup truck totally fried you!
+  - Sadly the pickup truck made it all boil down to this.
   m_TileReferencesF1Pos1:
   - vp10
   - vp02

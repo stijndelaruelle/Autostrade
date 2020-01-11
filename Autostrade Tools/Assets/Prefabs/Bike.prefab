@@ -50,6 +50,11 @@ MonoBehaviour:
   m_Moves: 05000000
   m_Width: 1
   m_Height: 1
+  m_Endings:
+  - The bike and you got totally scrambled!
+  - The bike unfortunatly cracked the case.
+  - The bike totally fried you!
+  - Sadly the bike made it all boil down to this.
   m_TileReferencesF1Pos1:
   - vb01
   m_TileReferencesF1Pos2:

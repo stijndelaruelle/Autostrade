@@ -6,6 +6,40 @@ using UnityEngine;
 
 public class BitsyExporter : MonoBehaviour
 {
+    public class Ending
+    {
+        private Vector2Int m_Position;
+        public Vector2Int Position
+        {
+            get { return m_Position; }
+        }
+
+        private string m_Reason;
+        public string Reason
+        {
+            get { return m_Reason; }
+        }
+
+        public Ending(Vector2Int position, string reason)
+        {
+            m_Position = position;
+            m_Reason = reason;
+        }
+
+        public bool Equals(Vector2Int other)
+        {
+            return this.m_Position.x == other.x &&
+                   this.m_Position.y == other.y;
+        }
+
+        public bool Equals(Ending other)
+        {
+            return this.m_Position.x == other.Position.x &&
+                   this.m_Position.y == other.Position.y &&
+                   this.m_Reason == other.Reason;
+        }
+    }
+
     [SerializeField]
     private LevelTimeline m_LevelTimeline = null;
 
@@ -103,8 +137,8 @@ public class BitsyExporter : MonoBehaviour
         stringBuilder.AppendLine(); //Whiteline
 
         //Rooms
-        int numberOfEndings = 0;
-        success = ExportRooms(stringBuilder, ref numberOfEndings);
+        List<Ending> endings = new List<Ending>();
+        success = ExportRooms(stringBuilder, ref endings);
         if (success == false) { return false; }
 
         stringBuilder.AppendLine();
@@ -134,7 +168,7 @@ public class BitsyExporter : MonoBehaviour
         stringBuilder.AppendLine();
 
         //Endings
-        success = ExportEndings(stringBuilder, numberOfEndings);
+        success = ExportEndings(stringBuilder, endings);
         if (success == false) { return false; }
 
         stringBuilder.AppendLine();
@@ -178,7 +212,7 @@ public class BitsyExporter : MonoBehaviour
         return true;
     }
 
-    private bool ExportRooms(StringBuilder stringBuilder, ref int lastEndID)
+    private bool ExportRooms(StringBuilder stringBuilder, ref List<Ending> globalEndings)
     {
         if (m_LevelTimeline == null)
             return false;
@@ -194,7 +228,7 @@ public class BitsyExporter : MonoBehaviour
 
             bool addExists = !(roomID >= m_LevelTimeline.TimelineMaxRange);
 
-            bool success = ExportRoom(stringBuilder, roomID, addExists, ref lastEndID);
+            bool success = ExportRoom(stringBuilder, roomID, addExists, ref globalEndings);
             if (success == false) { return false; }
 
             if (addExists)
@@ -209,16 +243,16 @@ public class BitsyExporter : MonoBehaviour
         return true;
     }
 
-    private bool ExportRoom(StringBuilder stringBuilder, int roomID, bool addExits, ref int lastEndID)
+    private bool ExportRoom(StringBuilder stringBuilder, int roomID, bool addExits, ref List<Ending> globalEndings)
     {
-        List<Vector2Int> endPositions = new List<Vector2Int>();
+        List<Ending> localEndings = new List<Ending>();
 
         //Room ID
         stringBuilder.AppendFormat("ROOM {0}", roomID);
         stringBuilder.Append(Environment.NewLine);
 
         //Room Data
-        ExportRoomData(stringBuilder, roomID, ref endPositions);
+        ExportRoomData(stringBuilder, roomID, ref localEndings);
         stringBuilder.Append(Environment.NewLine);
 
         //Room Name
@@ -232,8 +266,18 @@ public class BitsyExporter : MonoBehaviour
             {
                 for (int x = s_PlayableZoneStartX; x <= s_PlayableZoneEndX; ++x)
                 {
+                    bool foundEnding = false;
+                    foreach (Ending ending in localEndings)
+                    {
+                        if (ending.Position == new Vector2Int(x, y))
+                        {
+                            foundEnding = true;
+                            break;
+                        }
+                    }
+
                     //Only add exists if there isn't an ending at that position
-                    if (endPositions.Contains(new Vector2Int(x, y)) == false)
+                    if (foundEnding == false)
                     {
                         stringBuilder.AppendFormat("EXT {0},{1} {2} {0},{1}", x, y, roomID + 1);
                         stringBuilder.Append(Environment.NewLine);
@@ -243,12 +287,12 @@ public class BitsyExporter : MonoBehaviour
         }
 
         //Endings
-        foreach(Vector2Int endPosition in endPositions)
+        foreach(Ending ending in localEndings)
         {
-            stringBuilder.AppendFormat("END {0} {1},{2}", lastEndID, endPosition.x, endPosition.y);
+            stringBuilder.AppendFormat("END {0} {1},{2}", globalEndings.Count - 1, ending.Position.x, ending.Position.y);
             stringBuilder.Append(Environment.NewLine);
 
-            lastEndID += 1;
+            globalEndings.Add(ending); //Add to the global list
         }
 
         //Palette
@@ -258,7 +302,7 @@ public class BitsyExporter : MonoBehaviour
         return true;
     }
 
-    private void ExportRoomData(StringBuilder stringBuilder, int roomID, ref List<Vector2Int> endPositions)
+    private void ExportRoomData(StringBuilder stringBuilder, int roomID, ref List<Ending> localEndings)
     {
         //We are already at the correct frame
         List<string> roomData = null;
@@ -310,10 +354,19 @@ public class BitsyExporter : MonoBehaviour
                 if (hitbox.x >= 0 && hitbox.x < s_RoomSize &&
                     hitbox.y >= 0 && hitbox.y < s_RoomSize)
                 {
-                    if (endPositions.Contains(hitbox) == false)
+                    bool foundEnding = false;
+                    foreach(Ending ending in localEndings)
                     {
-                        endPositions.Add(hitbox);
+                        if (ending.Position == hitbox)
+                        {
+                            foundEnding = true;
+                            break;
+
+                        }
                     }
+                    
+                    if (foundEnding == false)
+                        localEndings.Add(new Ending(hitbox, vehicle.GetRandomEnding()));
                 }
             }
         }
@@ -3089,7 +3142,167 @@ TIL vt55
 10000101
 10000110
 10000111
-NAME truck13_p4f1");
+NAME truck13_p4f1
+
+TIL uib01
+00010101
+01000000
+00010101
+10100000
+00000000
+10100000
+00000000
+10100000
+>
+00101010
+00000000
+10101010
+00000000
+10100000
+00000000
+10100000
+00000000
+NAME border_1
+
+TIL uib02
+01010101
+00000000
+01010101
+00000000
+00000000
+00000000
+00000000
+00000000
+>
+10101010
+00000000
+10101010
+00000000
+00000000
+00000000
+00000000
+00000000
+NAME border_2
+
+TIL uib03
+01010100
+00000000
+01010101
+00000000
+00000101
+00000000
+00000101
+00000000
+>
+10101000
+00000010
+10101000
+00000101
+00000000
+00000101
+00000000
+00000101
+NAME border_3
+
+TIL uib04
+00000000
+10100000
+00000000
+10100000
+00000000
+10100000
+00000000
+10100000
+>
+10100000
+00000000
+10100000
+00000000
+10100000
+00000000
+10100000
+00000000
+NAME border_4
+
+TIL uib05
+00000101
+00000000
+00000101
+00000000
+00000101
+00000000
+00000101
+00000000
+>
+00000000
+00000101
+00000000
+00000101
+00000000
+00000101
+00000000
+00000101
+NAME border_5
+
+TIL uib06
+00000000
+10100000
+00000000
+10100000
+00000000
+10101010
+00000000
+00101010
+>
+10100000
+00000000
+10100000
+00000000
+10100000
+00010101
+01000000
+00010101
+NAME border_6
+
+TIL uib07
+00000000
+00000000
+00000000
+00000000
+00000000
+10101010
+00000000
+10101010
+>
+00000000
+00000000
+00000000
+00000000
+00000000
+01010101
+00000000
+01010101
+NAME border_7
+
+TIL uib08
+00000101
+00000000
+00000101
+00000000
+00000101
+10101000
+00000010
+10101000
+>
+00000000
+00000101
+00000000
+00000101
+00000000
+01010101
+00000000
+01010100
+NAME border_8");
 
         return true;
     }
@@ -3167,16 +3380,16 @@ You found a nice warm cup of tea");
         return true;
     }
 
-    private bool ExportEndings(StringBuilder stringBuilder, int numberOfEndings)
+    private bool ExportEndings(StringBuilder stringBuilder, List<Ending> endings)
     {
-        for (int i = 0; i < numberOfEndings; ++i)
+        for (int i = 0; i < endings.Count; ++i)
         {
             stringBuilder.AppendFormat("END {0}", i);
             stringBuilder.Append(Environment.NewLine);
-            stringBuilder.AppendLine("You crached!");
+            stringBuilder.AppendLine(endings[i].Reason);
 
             //Add whitespace
-            if (i < numberOfEndings - 1)
+            if (i < endings.Count - 1)
                 stringBuilder.AppendLine();
         }
 

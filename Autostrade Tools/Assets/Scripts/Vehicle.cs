@@ -43,6 +43,13 @@ public class Vehicle : MonoBehaviour
         get { return m_Height; }
     }
 
+    [SerializeField]
+    private List<string> m_Endings;
+    public List<string> Endings
+    {
+        get { return m_Endings; }
+    }
+
     //Note, if this were a real project this would be structured more neatly
     [Header("Frame 1")]
     [SerializeField]
@@ -217,6 +224,14 @@ public class Vehicle : MonoBehaviour
         return hitboxes;
     }
 
+    public string GetRandomEnding()
+    {
+        if (m_Endings == null || m_Endings.Count == 0)
+            return string.Empty;
+
+        int rand = Random.Range(0, m_Endings.Count);
+        return m_Endings[rand];
+    }
     //Callback
     private void OnStepChanged(int newFrame, int oldFrame)
     {
