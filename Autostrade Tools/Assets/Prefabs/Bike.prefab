@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_LevelTimeline: {fileID: 0}
-  m_Speed: 2
+  m_Speed: 1
+  m_StartFrame: 0
   m_Moves: 05000000
   m_Width: 1
   m_Height: 1
