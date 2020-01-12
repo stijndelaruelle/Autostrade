@@ -47,6 +47,9 @@ public class BitsyExporter : MonoBehaviour
     private string m_GameName = string.Empty;
 
     [SerializeField]
+    private string m_Filename = string.Empty;
+
+    [SerializeField]
     private Color m_BackgroundColor = Color.white;
 
     [SerializeField]
@@ -99,6 +102,25 @@ public class BitsyExporter : MonoBehaviour
         "0","0","0","env17","env19","env01","0","env07","env08","0","env02","env23","env21","0","0","0",
         "0","0","0","env18","env20","env01","0","env05","env06","0","env02","env24","env22","0","0","0",
         "0","0","0","env25","env27","env01","0","env07","env08","0","env02","env31","env29","0","0","0"
+    };
+    private static string[] s_IntroRoomData =
+    {
+        "0","0","0","0"    ,"0"    ,"env01","0","env03","env04","0","env02","0"    ,"0"    ,"0","0","0",
+        "0","0","0","env09","env11","env01","0","0"    ,"0"    ,"0","env02","env15","env13","0","0","0",
+        "0","0","0","env10","env12","env01","0","env03","env04","0","env02","env16","env14","0","0","0",
+        "0","0","0","0"    ,"0"    ,"env01","0","0"    ,"0"    ,"0","env02","0"    ,"0"    ,"0","0","0",
+        "0","0","0","0"    ,"0"    ,"env01","0","env03","env04","0","env02","0"    ,"0"    ,"0","0","0",
+        "0","0","0","env09","env11","env01","0","0"    ,"0"    ,"0","env02","env15","env13","0","0","0",
+        "0","0","0","env10","env12","env01","0","env03","env04","0","env02","env16","env14","0","0","0",
+        "0","0","0","0"    ,"0"    ,"env01","0","0"    ,"0"    ,"0","env02","0"    ,"0"    ,"0","0","0",
+        "0","0","0","0"    ,"0"    ,"env01","0","env03","env04","0","env02","0"    ,"0"    ,"0","0","0",
+        "0","0","0","env09","env11","env01","0","0"    ,"0"    ,"0","env02","env15","env13","0","0","0",
+        "0","0","0","env10","env12","env01","0","0"    ,"0"    ,"0","env02","env16","env14","0","0","0",
+        "0","0","0","0"    ,"0"    ,"env01","0","env03","env04","0","env02","0"    ,"0"    ,"0","0","0",
+        "0","0","0","0"    ,"0"    ,"env01","0","0"    ,"0"    ,"0","env02","0"    ,"0"    ,"0","0","0",
+        "0","0","0","env09","env11","env01","0","env03","env04","0","env02","env15","env13","0","0","0",
+        "0","0","0","env10","env12","env01","0","0"    ,"0"    ,"0","env02","env16","env14","0","0","0",
+        "0","0","0","0"    ,"0"    ,"env01","0","env03","env04","0","env02","0"    ,"0"    ,"0","0","0"
     };
 
     //Export functions
@@ -155,6 +177,11 @@ public class BitsyExporter : MonoBehaviour
 
         stringBuilder.AppendLine();
 
+        success = ExportSprites(stringBuilder);
+        if (success == false) { return false; }
+
+        stringBuilder.AppendLine();
+
         //Items
         success = ExportItems(stringBuilder);
         if (success == false) { return false; }
@@ -182,7 +209,7 @@ public class BitsyExporter : MonoBehaviour
 
     private void WriteToFile(StringBuilder stringBuilder)
     {
-        System.IO.StreamWriter file = new System.IO.StreamWriter(@"./" + m_GameName + ".bitsy");
+        System.IO.StreamWriter file = new System.IO.StreamWriter(@"./" + m_Filename + ".bitsy");
 
         file.WriteLine(stringBuilder.ToString());
 
@@ -309,7 +336,7 @@ public class BitsyExporter : MonoBehaviour
 
         if (roomID == m_LevelTimeline.TimelineMinRange)
         {
-            roomData = new List<string>(s_EmptyStillRoomData);
+            roomData = new List<string>(s_IntroRoomData);
         }
         else if (roomID == m_LevelTimeline.TimelineMaxRange)
         {
@@ -3351,6 +3378,232 @@ NAME border_8");
         return true;
     }
 
+    private bool ExportSprites(StringBuilder stringBuilder)
+    {
+        //We don't actually read texture data or anything, just shove this datablob in there
+        //NOTE: Don't tab! Otherwise it will add whitespace that we don't need
+        stringBuilder.AppendLine(@"SPR uictrl01
+00111111
+01000000
+10011111
+10100000
+10100000
+10100000
+10100000
+10100000
+NAME ui_ctrl_01
+POS 0 6,6
+
+SPR uictrl02
+11111111
+00000000
+11111111
+00000000
+00000000
+00000000
+00000000
+01110000
+NAME ui_ctrl_02
+POS 0 7,6
+
+SPR uictrl03
+11111111
+00000000
+11111111
+00000000
+00000000
+00000000
+00000000
+00011100
+>
+11111111
+00000000
+11111111
+00000000
+00000000
+00000000
+00000000
+00000000
+NAME ui_ctrl_03
+POS 0 8,6
+
+SPR uictrl04
+11111100
+00000010
+11111001
+00000101
+00000101
+00000101
+00000101
+00000101
+NAME ui_ctrl_04
+POS 0 9,6
+
+SPR uictrl05
+10100000
+10100001
+10100010
+10100010
+10100010
+10100011
+10100011
+10100001
+NAME ui_ctrl_05
+POS 0 6,7
+
+SPR uictrl06
+10001000
+00000100
+01110010
+01100001
+01010010
+00000100
+10001000
+11010010
+NAME ui_ctrl_06
+POS 0 7,7
+
+SPR uictrl07
+00100010
+01000001
+10011100
+00001100
+10010100
+01000001
+00100011
+10010111
+>
+00011100
+00100010
+01000001
+10011100
+10001100
+01010100
+00100001
+10010011
+NAME ui_ctrl_07
+POS 0 8,7
+
+SPR uictrl08
+00000101
+00000101
+10000101
+10000101
+10000101
+10000101
+10000101
+00000101
+>
+00000101
+00000101
+00000101
+10000101
+10000101
+10000101
+10000101
+00000101
+NAME ui_ctrl_08
+POS 0 9,7
+
+SPR uictrl09
+10100000
+10100000
+10100000
+10100000
+10100000
+10100000
+10100000
+10100000
+NAME ui_ctrl_09
+POS 0 6,8
+
+SPR uictrl0a
+11100011
+01110011
+00111000
+00011100
+00001110
+00000111
+00000011
+00000001
+NAME ui_ctrl_10
+POS 0 7,8
+
+SPR uictrl0b
+00001110
+10010100
+00100010
+01000001
+10010100
+00001100
+10011100
+11000001
+NAME ui_ctrl_11
+POS 0 8,8
+
+SPR uictrl0c
+00000101
+00000101
+00000101
+00000101
+10000101
+10000101
+10000101
+10000101
+NAME ui_ctrl_12
+POS 0 9,8
+
+SPR uictrl0d
+10100000
+10100000
+10100000
+10100000
+10100000
+10011111
+01000000
+00111111
+NAME ui_ctrl_13
+POS 0 6,9
+
+SPR uictrl0e
+00000000
+00000000
+00000000
+00000000
+00000000
+11111111
+00000000
+11111111
+NAME ui_ctrl_14
+POS 0 7,9
+
+SPR uictrl0f
+11100011
+01111111
+00111110
+00000000
+00000000
+11111111
+00000000
+11111111
+NAME ui_ctrl_15
+POS 0 8,9
+
+SPR uictrl0g
+10000101
+00000101
+00000101
+00000101
+00000101
+11111001
+00000010
+11111100
+NAME ui_ctrl_16
+POS 0 9,9");
+
+        return true;
+    }
+
     private bool ExportItems(StringBuilder stringBuilder)
     {
         //This game doesn't use items (yet) but Bitsy requires us to have at least 1
@@ -3409,6 +3662,6 @@ You found a nice warm cup of tea");
     //Misc
     public void OpenExportedFile()
     {
-        System.Diagnostics.Process.Start(@".\" + m_GameName + ".bitsy");
+        System.Diagnostics.Process.Start(@".\" + m_Filename + ".bitsy");
     }
 }

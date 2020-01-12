@@ -27,6 +27,9 @@ public class CustomBitsyExporterInspector : Editor
         //Game Name
         serializedProperty = serializedObject.FindProperty("m_GameName");
         serializedProperty.stringValue = EditorGUILayout.TextField("Game Name", serializedProperty.stringValue);
+
+        serializedProperty = serializedObject.FindProperty("m_Filename");
+        serializedProperty.stringValue = EditorGUILayout.TextField("File Name", serializedProperty.stringValue);
         EditorGUILayout.Space();
 
         //Previous & Next Buttons
