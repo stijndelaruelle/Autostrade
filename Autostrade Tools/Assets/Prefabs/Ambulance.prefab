@@ -1,0 +1,188 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7529240717116797991
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7529240717116798009}
+  - component: {fileID: 7529240717116798008}
+  - component: {fileID: 7529240717116797990}
+  m_Layer: 0
+  m_Name: Ambulance
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7529240717116798009
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7529240717116797991}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5, y: -10, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7529240717116798008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7529240717116797991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93e67669d0c98244a42749729cb0bf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LevelTimeline: {fileID: 0}
+  m_Speed: 1
+  m_StartFrame: 0
+  m_Moves: 05000000
+  m_Width: 3
+  m_Height: 3
+  m_Endings:
+  - The ambulance and you got totally scrambled!
+  - The ambulance cracked the case.
+  - The ambulance totally fried you!
+  - Sadly the ambulance made it all boil down to this.
+  m_TileReferencesF1Pos1:
+  - vp10
+  - vp02
+  - vp11
+  - vp12
+  - va01
+  - vp13
+  - vp14
+  - va02
+  - vp15
+  m_TileReferencesF1Pos2:
+  - vp01
+  - vp02
+  - vp16
+  - vp04
+  - va01
+  - vp06
+  - vp07
+  - va03
+  - vp18
+  m_TileReferencesF1Pos3:
+  - vp19
+  - vp02
+  - vp03
+  - vp04
+  - va01
+  - vp06
+  - vp20
+  - va04
+  - vp09
+  m_TileReferencesF1Pos4:
+  - vp22
+  - vp02
+  - vp23
+  - vp24
+  - va01
+  - vp25
+  - vp26
+  - va02
+  - vp27
+  m_TileReferencesF2Pos1:
+  - vp10
+  - vp02
+  - vp28
+  - vp12
+  - va01
+  - vp29
+  - vp14
+  - va02
+  - vp30
+  m_TileReferencesF2Pos2:
+  - vp01
+  - vp31
+  - vp32
+  - vp04
+  - va01
+  - vp06
+  - vp07
+  - va02
+  - vp34
+  m_TileReferencesF2Pos3:
+  - vp35
+  - vp36
+  - vp03
+  - vp04
+  - va01
+  - vp06
+  - vp37
+  - va02
+  - vp09
+  m_TileReferencesF2Pos4:
+  - vp39
+  - vp02
+  - vp23
+  - vp40
+  - va01
+  - vp25
+  - vp41
+  - va02
+  - vp27
+--- !u!212 &7529240717116797990
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7529240717116797991}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: -8748251478453290860, guid: 003f1ac09afb7a548b9882aa26a79db8,
+    type: 3}
+  m_Color: {r: 0.7169812, g: 0.7169812, b: 0.7169812, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 2}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0

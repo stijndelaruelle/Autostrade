@@ -56,6 +56,12 @@ TextureImporter:
   - first:
       213: 4812653232926901425
     second: Autostrade_Bike_Frame2
+  - first:
+      213: -8748251478453290860
+    second: Autostrade_Ambulance_Frame1
+  - first:
+      213: -2808381765565312248
+    second: Autostrade_Ambulance_Frame2
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -471,6 +477,48 @@ TextureImporter:
       bones: []
       spriteID: 31e2d8abcf67a9842993c39eb86e80eb
       internalID: -5334162173993658803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Autostrade_Ambulance_Frame1
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 80
+        width: 24
+        height: 24
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d969081421581648a7499b13a81dece
+      internalID: -8748251478453290860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Autostrade_Ambulance_Frame2
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 80
+        width: 24
+        height: 24
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51ac477433df51f4a9fe66556ef3d959
+      internalID: -2808381765565312248
       vertices: []
       indices: 
       edges: []
